@@ -81,16 +81,6 @@
     words = Array.from(statement.querySelectorAll('.word'));
   }
 
-  /* ---------- Hero-Videos synchron halten (Karte + Hintergrund) ---------- */
-  const heroVideos = document.querySelectorAll('.hero video');
-  if (heroVideos.length === 2) {
-    const [bg, card] = heroVideos;
-    setInterval(() => {
-      if (getComputedStyle(card.parentElement).display === 'none') return;
-      if (Math.abs(bg.currentTime - card.currentTime) > 0.25) bg.currentTime = card.currentTime;
-    }, 1500);
-  }
-
   /* ---------- Hero schrumpft beim Scrollen, Quickbar erscheint ---------- */
   const hero = document.querySelector('.hero-frame');
   const nav = document.querySelector('.nav');
