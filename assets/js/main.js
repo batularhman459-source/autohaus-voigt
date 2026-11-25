@@ -19,15 +19,17 @@
     void intro.offsetWidth;            // Animation neu starten
     intro.classList.add('play');
     window.scrollTo(0, 0);
-    clearTimeout(playIntro.t);
-    playIntro.t = setTimeout(finishIntro, 4250);
+    clearTimeout(playIntro.t); clearTimeout(playIntro.h);
+    // Hero startet, sobald der Vorhang hochfährt; Intro danach entfernen
+    playIntro.h = setTimeout(() => { body.classList.remove('is-intro'); body.classList.add('intro-done'); }, 1900);
+    playIntro.t = setTimeout(finishIntro, 2750);
   }
   if (intro) {
-    // Pfade des Pferds nacheinander zeichnen (links -> rechts)
+    // Alle Linien des Pferds zeichnen sich gleichzeitig, leicht versetzt
     const paths = intro.querySelectorAll('.intro-horse path');
-    paths.forEach((p, i) => {
+    paths.forEach((p) => {
       p.setAttribute('pathLength', '1');
-      p.style.animationDelay = (0.05 + 1.25 * i / paths.length).toFixed(2) + 's';
+      p.style.animationDelay = (Math.random() * 0.3).toFixed(2) + 's';
     });
     playIntro();
     // Klick aufs Logo spielt das Intro erneut ab
@@ -54,7 +56,10 @@
   }
 
   /* ---------- Scroll-Reveal ---------- */
-  const reveals = document.querySelectorAll('.reveal');
+  const reveals = document.querySelectorAll('.reveal, .f-stagger, .f-word.fx');
+  // Footer-Spalten nacheinander einblenden
+  document.querySelectorAll('.f-stagger').forEach((g) =>
+    Array.from(g.children).forEach((c, i) => { c.style.transitionDelay = (0.05 + i * 0.1).toFixed(2) + 's'; }));
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach((en) => {
