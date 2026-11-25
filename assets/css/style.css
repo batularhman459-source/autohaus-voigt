@@ -137,7 +137,7 @@ body.no-hero main { padding-top: 64px; }
   position: absolute; inset: 0; pointer-events: none; opacity: .3; mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-.hero-shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(18,18,20,.6) 0%, rgba(18,18,20,.1) 18%, rgba(18,18,20,0) 40%, rgba(18,18,20,.35) 65%, rgba(18,18,20,.85) 100%); }
+.hero-shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(18,18,20,.75) 0%, rgba(18,18,20,.25) 14%, rgba(18,18,20,0) 26%, rgba(18,18,20,0) 40%, rgba(18,18,20,.35) 65%, rgba(18,18,20,.85) 100%); }
 .hero-content {
   position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; padding: 0 40px 8px;
   display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: end; gap: 16px;

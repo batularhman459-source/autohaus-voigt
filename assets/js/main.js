@@ -81,6 +81,24 @@
     words = Array.from(statement.querySelectorAll('.word'));
   }
 
+  /* ---------- Hero-Video: Desktop (quer) oder Handy (hochkant) ---------- */
+  const heroVideo = document.querySelector('.hero-bg');
+  if (heroVideo) {
+    const mq = window.matchMedia('(max-width: 1023px), (max-aspect-ratio: 1/1)');
+    const pick = () => {
+      const kind = mq.matches ? 'mobile' : 'desktop';
+      if (heroVideo.dataset.current === kind) return;
+      heroVideo.dataset.current = kind;
+      heroVideo.poster = heroVideo.dataset['poster' + (kind === 'mobile' ? 'Mobile' : 'Desktop')];
+      heroVideo.src = heroVideo.dataset['src' + (kind === 'mobile' ? 'Mobile' : 'Desktop')];
+      heroVideo.load();
+      const p = heroVideo.play();
+      if (p && p.catch) p.catch(() => {});
+    };
+    pick();
+    if (mq.addEventListener) mq.addEventListener('change', pick); else mq.addListener(pick);
+  }
+
   /* ---------- Hero schrumpft beim Scrollen, Quickbar erscheint ---------- */
   const hero = document.querySelector('.hero-frame');
   const nav = document.querySelector('.nav');
