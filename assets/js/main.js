@@ -47,6 +47,7 @@
       const open = menu.classList.toggle('open');
       toggle.setAttribute('aria-expanded', String(open));
       body.style.overflow = open ? 'hidden' : '';
+      onScroll();
     });
     menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
       menu.classList.remove('open');
@@ -82,6 +83,7 @@
 
   /* ---------- Hero schrumpft beim Scrollen, Quickbar erscheint ---------- */
   const hero = document.querySelector('.hero-frame');
+  const nav = document.querySelector('.nav');
   document.querySelectorAll('.hero-title .ch').forEach((c, i) => { c.style.animationDelay = (i * 0.08).toFixed(2) + 's'; });
   const quickbar = document.querySelector('.quickbar');
   let ticking = false;
@@ -90,8 +92,8 @@
     if (hero && !reduced) {
       const h = hero.offsetHeight;
       const p = Math.min(Math.max(window.scrollY / h, 0), 1);
-      hero.style.transform = 'scale(' + (1 - p * 0.06).toFixed(4) + ')';
-            hero.style.opacity = (1 - p * 0.5).toFixed(3);
+      const hc = hero.querySelector('.hero-content');
+      if (hc) { hc.style.transform = 'translateY(' + (-p * h * 0.15).toFixed(1) + 'px)'; hc.style.opacity = (1 - p * 1.2).toFixed(3); }
     }
     if (words.length) {
       const r = statement.getBoundingClientRect();
@@ -100,6 +102,7 @@
       const on = Math.round(prog * words.length);
       words.forEach((w, i) => w.classList.toggle('on', i < on));
     }
+    if (nav) nav.classList.toggle('solid', window.scrollY > 40 || (menu && menu.classList.contains('open')));
     if (quickbar) quickbar.classList.toggle('show', window.scrollY > vh * 0.6);
     ticking = false;
   }
