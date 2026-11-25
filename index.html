@@ -248,29 +248,31 @@
   </nav>
 
   <main>
-    <!-- ============ HERO (Video) ============ -->
+    <!-- ============ HERO (Video, Prisma-Stil) ============ -->
     <section class="hero" id="top" aria-label="Willkommen">
-      <div class="hero-media" aria-hidden="true">
-        <!-- Platzhalter-Grafik, liegt unter dem Video -->
-        <svg viewBox="0 0 1440 820" preserveAspectRatio="xMidYMid slice" fill="none" stroke="#fff" stroke-width="1" stroke-opacity=".08">
-          <path d="M560 160 L720 110 L860 170 L980 140 L1060 260 L960 360 L1040 470 L900 520 L760 460 L640 520 L560 400 L620 290 Z M720 110 L620 290 L860 170 L760 330 L980 140 M860 170 L960 360 L760 330 L900 520 M760 330 L640 520 M620 290 L760 330 L560 400 M960 360 L1060 260"/>
-        </svg>
-        <!-- Eigenes Video als assets/video/hero.mp4 ablegen -->
-        <video autoplay muted loop playsinline preload="auto">
-          <source src="assets/video/hero.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="hero-shade" aria-hidden="true"></div>
-      <div class="hero-content">
-        <h1>Ihr nächstes Auto.</h1>
-        <p>Geprüft. Persönlich. In Radevormwald.</p>
-        <div class="hero-actions">
-          <a href="fahrzeuge.html" class="btn btn-light">Fahrzeuge ansehen</a>
-          <a href="#verkaufen" class="link-more on-dark">Auto verkaufen
-            <svg aria-hidden="true" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 2l4 4-4 4"/></svg></a>
+      <div class="hero-frame">
+        <div class="hero-media" aria-hidden="true">
+          <svg viewBox="0 0 1440 820" preserveAspectRatio="xMidYMid slice" fill="none" stroke="#fff" stroke-width="1" stroke-opacity=".08">
+            <path d="M560 160 L720 110 L860 170 L980 140 L1060 260 L960 360 L1040 470 L900 520 L760 460 L640 520 L560 400 L620 290 Z M720 110 L620 290 L860 170 L760 330 L980 140 M860 170 L960 360 L760 330 L900 520 M760 330 L640 520 M620 290 L760 330 L560 400 M960 360 L1060 260"/>
+          </svg>
+          <!-- Eigenes Video: assets/video/hero.mp4 (wird automatisch schwarz-weiß) -->
+          <video autoplay muted loop playsinline preload="auto">
+            <source src="assets/video/hero.mp4" type="video/mp4">
+            <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="hero-noise" aria-hidden="true"></div>
+        <div class="hero-shade" aria-hidden="true"></div>
+
+        <div class="hero-content">
+          <h1 class="hero-title" aria-label="Voigt"><span class="ch" aria-hidden="true">V</span><span class="ch" aria-hidden="true">o</span><span class="ch" aria-hidden="true">i</span><span class="ch" aria-hidden="true">g</span><span class="ch" aria-hidden="true">t</span><span class="ch star" aria-hidden="true">*</span></h1>
+          <div class="hero-side">
+            <p>Geprüfte Gebrauchtwagen, faire Inzahlungnahme und persönliche Beratung – Ihr Autohaus in Radevormwald. *Seit [JAHR].</p>
+            <a href="fahrzeuge.html" class="hero-cta">Fahrzeuge ansehen
+              <i><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></a>
+          </div>
         </div>
       </div>
-      <span class="hero-note">Platzhalter · Hero-Video unter assets/video/hero.mp4</span>
     </section>
 
     <!-- ============ STATEMENT ============ -->

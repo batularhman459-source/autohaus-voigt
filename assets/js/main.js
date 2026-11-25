@@ -81,7 +81,8 @@
   }
 
   /* ---------- Hero schrumpft beim Scrollen, Quickbar erscheint ---------- */
-  const hero = document.querySelector('.hero');
+  const hero = document.querySelector('.hero-frame');
+  document.querySelectorAll('.hero-title .ch').forEach((c, i) => { c.style.animationDelay = (i * 0.08).toFixed(2) + 's'; });
   const quickbar = document.querySelector('.quickbar');
   let ticking = false;
   function onScroll() {
@@ -89,9 +90,8 @@
     if (hero && !reduced) {
       const h = hero.offsetHeight;
       const p = Math.min(Math.max(window.scrollY / h, 0), 1);
-      hero.style.transform = 'scale(' + (1 - p * 0.1).toFixed(4) + ')';
-      hero.style.borderRadius = (p * 32).toFixed(1) + 'px';
-      hero.style.opacity = (1 - p * 0.5).toFixed(3);
+      hero.style.transform = 'scale(' + (1 - p * 0.06).toFixed(4) + ')';
+            hero.style.opacity = (1 - p * 0.5).toFixed(3);
     }
     if (words.length) {
       const r = statement.getBoundingClientRect();
