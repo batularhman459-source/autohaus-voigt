@@ -4,7 +4,14 @@ Statische Website: reines HTML, CSS und JavaScript, ohne Build-Schritt.
 
 ## Lokal starten
 
-Im Projektordner einen der beiden Befehle ausführen und dann **http://localhost:8000** öffnen.
+Im Projektordner einen der Befehle ausführen und dann **http://localhost:8000** öffnen.
+
+Mit Node (funktioniert auch in Windows PowerShell):
+
+```bash
+npm install
+npm run dev
+```
 
 Mit Python:
 
