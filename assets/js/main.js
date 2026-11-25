@@ -11,7 +11,7 @@
     if (intro) intro.hidden = true;
   }
   function playIntro() {
-    if (!intro || reduced) { finishIntro(); return; }
+    if (!intro) { finishIntro(); return; }
     body.classList.remove('intro-done');
     body.classList.add('is-intro');
     intro.hidden = false;
@@ -55,7 +55,7 @@
 
   /* ---------- Scroll-Reveal ---------- */
   const reveals = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window && !reduced) {
+  if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach((en) => {
         if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
@@ -93,7 +93,7 @@
       // 0 wenn der Satz unten reinkommt, 1 wenn er in der oberen Hälfte ist
       const prog = Math.min(Math.max((vh * 0.85 - r.top) / (vh * 0.5), 0), 1);
       const on = Math.round(prog * words.length);
-      words.forEach((w, i) => w.classList.toggle('on', i < on || reduced));
+      words.forEach((w, i) => w.classList.toggle('on', i < on));
     }
     if (quickbar) quickbar.classList.toggle('show', window.scrollY > vh * 0.6);
     ticking = false;

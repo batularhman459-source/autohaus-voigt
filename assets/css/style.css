@@ -244,9 +244,15 @@ body.is-intro .hero-content > * { opacity: 0; }
 .reveal.in { opacity: 1; transform: none; }
 
 /* ---------- Bewegung reduzieren ---------- */
+/* Intro läuft trotzdem (Logo zeichnet sich), aber ohne Zoom, Unschärfe
+   und Vorhang-Bewegung: es blendet nur weich aus. Keine Parallax-Effekte. */
 @media (prefers-reduced-motion: reduce) {
-  .intro { display: none !important; }
-  *, *::before, *::after { animation: none !important; transition: none !important; }
-  .reveal { opacity: 1; transform: none; }
-  .statement .word { color: var(--ink); }
+  .intro.play { animation: introFade .8s 3.25s ease forwards; }
+  .intro.play .intro-mark { animation: none; }
+  body.intro-done .hero-media { animation: none; }
+  body.intro-done .hero-content > * { animation-name: fadeIn; }
+  .reveal { transform: none; }
+  .car:hover { transform: none; }
 }
+@keyframes introFade { to { opacity: 0; visibility: hidden; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
