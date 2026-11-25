@@ -125,33 +125,50 @@ body.no-hero main { padding-top: 64px; }
   .brand span { font-size: 13px; }
 }
 
-/* ---------- Hero (Prisma-Stil, monochrom) ---------- */
+/* ---------- Hero (Video) ---------- */
 .hero { background: var(--dark); }
 .hero-frame {
-  position: relative; height: 100svh; min-height: 600px;
+  position: relative; height: 100svh; min-height: 640px;
   overflow: hidden; background: var(--dark); color: #F4F3F0;
-  transform-origin: 50% 0; will-change: transform;
 }
 .hero-media { position: absolute; inset: 0; }
-.hero-media svg, .hero-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.hero-media video { filter: grayscale(1) contrast(1.05) brightness(.85); }
+/* Hintergrund: dasselbe Video, auf Desktop weich gezeichnet */
+.hero-bg { position: absolute; inset: -40px; width: calc(100% + 80px); height: calc(100% + 80px); object-fit: cover; filter: blur(34px) saturate(1.15) brightness(.55); transform: scale(1.05); }
 .hero-noise {
-  position: absolute; inset: 0; pointer-events: none; opacity: .55; mix-blend-mode: overlay;
+  position: absolute; inset: 0; pointer-events: none; opacity: .35; mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-.hero-shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(0,0,0,.30) 0%, rgba(0,0,0,0) 45%, rgba(0,0,0,.62) 100%); }
+.hero-shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(18,18,20,.75) 0%, rgba(18,18,20,.25) 55%, rgba(18,18,20,0) 100%), linear-gradient(180deg, rgba(18,18,20,.55) 0%, rgba(18,18,20,0) 30%, rgba(18,18,20,.6) 100%); }
+
+/* Scharfes Hochformat-Video als Karte rechts */
+.hero-card {
+  position: absolute; z-index: 2; right: 48px; top: 104px; bottom: 40px;
+  aspect-ratio: 9 / 16; border-radius: 24px; overflow: hidden;
+  box-shadow: 0 40px 80px -20px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.08);
+  background: #000; clip-path: inset(100% 0 0 0 round 24px);
+}
+.hero-card video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-card-tag {
+  position: absolute; left: 14px; bottom: 14px; display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 12px; border-radius: 980px; font-size: 12px; letter-spacing: .04em;
+  background: rgba(18,18,20,.55); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); color: #F4F3F0;
+}
+.hero-card-tag::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #F4F3F0; animation: blink 1.6s ease-in-out infinite; }
+@keyframes blink { 50% { opacity: .25; } }
+
 .hero-content {
-  position: absolute; left: 0; right: 0; bottom: 0; padding: 0 40px 8px;
-  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: end; gap: 16px;
+  position: absolute; z-index: 3; left: 0; bottom: 0; padding: 0 40px 8px;
+  width: calc(100% - (100svh - 144px) * 9 / 16 - 96px); min-width: 50%;
+  display: flex; flex-direction: column; gap: 32px;
 }
 .hero-title {
-  grid-column: span 8; margin: 0; font-weight: 500; line-height: .85; letter-spacing: -.07em;
-  font-size: 19vw; color: #F4F3F0; display: inline-flex; padding-bottom: .02em;
+  margin: 0; font-weight: 500; line-height: .85; letter-spacing: -.07em;
+  font-size: min(19vw, 24svh + 6vw); color: #F4F3F0; display: inline-flex; padding-bottom: .02em;
 }
 .hero-title .ch { display: inline-block; opacity: 0; transform: translateY(.25em); }
 .hero-title .star { font-size: .31em; position: relative; top: .3em; margin-left: .05em; letter-spacing: 0; }
-.hero-side { grid-column: span 4; display: flex; flex-direction: column; gap: 20px; padding-bottom: 40px; }
-.hero-side p { font-size: 17px; line-height: 1.25; color: rgba(244,243,240,.75); max-width: 420px; }
+.hero-side { display: flex; flex-direction: column; gap: 20px; max-width: 420px; order: -1; }
+.hero-side p { font-size: 17px; line-height: 1.3; color: rgba(244,243,240,.8); }
 .hero-side p, .hero-cta { opacity: 0; transform: translateY(20px); }
 .hero-cta {
   align-self: flex-start; display: inline-flex; align-items: center; gap: 10px;
@@ -162,17 +179,24 @@ body.no-hero main { padding-top: 64px; }
 .hero-cta i { width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: #F4F3F0; display: flex; align-items: center; justify-content: center; transition: transform .3s var(--ease-out); }
 .hero-cta:hover i { transform: scale(1.1); }
 .hero-cta svg { width: 16px; height: 16px; }
-.hero-note { position: absolute; right: 24px; bottom: 16px; font-size: 12px; color: rgba(244,243,240,.5); }
+
 body.intro-done .hero-media { animation: heroZoom 1.8s var(--ease-out) both; }
+body.intro-done .hero-card { animation: cardIn 1.2s .15s cubic-bezier(.65,0,.35,1) forwards; }
 body.intro-done .hero-title .ch { animation: pullUp .6s cubic-bezier(.16,1,.3,1) forwards; }
 body.intro-done .hero-side p { animation: pullUp .8s .5s cubic-bezier(.16,1,.3,1) forwards; }
 body.intro-done .hero-cta { animation: pullUp .8s .7s cubic-bezier(.16,1,.3,1) forwards; }
 @keyframes pullUp { to { opacity: 1; transform: none; } }
-@keyframes heroZoom { from { transform: scale(1.18); opacity: 0; } to { transform: none; opacity: 1; } }
-@media (max-width: 1023px) {
-  .hero-content { padding: 0 20px 4px; }
-  .hero-title { grid-column: 1 / -1; font-size: 26vw; }
-  .hero-side { grid-column: 1 / -1; padding-bottom: 24px; }
+@keyframes heroZoom { from { transform: scale(1.12); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes cardIn { to { clip-path: inset(0 0 0 0 round 24px); } }
+
+/* Tablet/Handy: Video bildschirmfüllend und scharf, keine Karte */
+@media (max-width: 1023px), (max-aspect-ratio: 1/1) {
+  .hero-card { display: none; }
+  .hero-bg { inset: 0; width: 100%; height: 100%; filter: none; transform: none; }
+  .hero-shade { background: linear-gradient(180deg, rgba(18,18,20,.8) 0%, rgba(18,18,20,.35) 12%, rgba(18,18,20,0) 26%, rgba(18,18,20,.15) 50%, rgba(18,18,20,.88) 100%); }
+  .hero-content { width: 100%; padding: 0 20px 4px; gap: 20px; }
+  .hero-title { font-size: 26vw; order: -1; }
+  .hero-side { order: 0; padding-bottom: 24px; }
 }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
 
@@ -314,6 +338,7 @@ body.intro-done .hero-cta { animation: pullUp .8s .7s cubic-bezier(.16,1,.3,1) f
   .intro.play { animation: introFade .6s 1.9s ease forwards; }
   .intro.play .intro-mark { animation: none; }
   body.intro-done .hero-media { animation: none; }
+  body.intro-done .hero-card { animation: none; clip-path: none; }
   body.intro-done .hero-title .ch, body.intro-done .hero-side p, body.intro-done .hero-cta { animation-name: fadeIn; transform: none; }
   .reveal { transform: none; }
   .car:hover { transform: none; }
