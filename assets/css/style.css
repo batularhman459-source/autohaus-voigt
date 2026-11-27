@@ -132,7 +132,12 @@ body.no-hero main { padding-top: 64px; }
   overflow: hidden; background: var(--dark); color: #F4F3F0;
 }
 .hero-media { position: absolute; inset: 0; }
-.hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero-strips { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; background: var(--dark); }
+.hero-strips video { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (max-width: 1023px), (max-aspect-ratio: 1/1) {
+  .hero-strips { grid-template-columns: 1fr; }
+  .hero-strips video:not(:first-child) { display: none; }
+}
 .hero-noise {
   position: absolute; inset: 0; pointer-events: none; opacity: .3; mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
