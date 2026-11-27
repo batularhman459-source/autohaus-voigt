@@ -81,28 +81,6 @@
     words = Array.from(statement.querySelectorAll('.word'));
   }
 
-  /* ---------- Hero-Video: PC = 3 zeitversetzte Streifen, Handy = 1 Video ---------- */
-  const strips = document.querySelector('.hero-strips');
-  if (strips) {
-    const vids = Array.from(strips.querySelectorAll('video'));
-    const mq = window.matchMedia('(max-width: 1023px), (max-aspect-ratio: 1/1)');
-    const start = (v, i, count) => {
-      if (!v.src) { v.preload = 'auto'; v.src = strips.dataset.src; }
-      const seek = () => { if (v.duration) v.currentTime = (v.duration * i / count) % v.duration; };
-      if (v.readyState >= 1) seek(); else v.addEventListener('loadedmetadata', seek, { once: true });
-      const p = v.play(); if (p && p.catch) p.catch(() => {});
-    };
-    const setup = () => {
-      const count = mq.matches ? 1 : 3;
-      vids.forEach((v, i) => {
-        if (i < count) start(v, i, count);
-        else v.pause();
-      });
-    };
-    setup();
-    if (mq.addEventListener) mq.addEventListener('change', setup); else mq.addListener(setup);
-  }
-
   /* ---------- Hero schrumpft beim Scrollen, Quickbar erscheint ---------- */
   const hero = document.querySelector('.hero-frame');
   const nav = document.querySelector('.nav');
