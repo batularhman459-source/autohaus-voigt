@@ -84,7 +84,7 @@
   /* ---------- Hero schrumpft beim Scrollen, Quickbar erscheint ---------- */
   const hero = document.querySelector('.hero-frame');
   const nav = document.querySelector('.nav');
-  document.querySelectorAll('.hero-title .ch').forEach((c, i) => { c.style.animationDelay = (i * 0.08).toFixed(2) + 's'; });
+  document.querySelectorAll('.hero-word-top .ch').forEach((c, i) => { c.style.animationDelay = (i * 0.06).toFixed(2) + 's'; });
   const quickbar = document.querySelector('.quickbar');
   let ticking = false;
   function onScroll() {
